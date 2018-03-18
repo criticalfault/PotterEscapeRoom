@@ -129,39 +129,39 @@ def FrameReader():
 def Spell(spell):
     #Invoke IoT (or any other) actions here
     #return
-    if (spell=="center"):
+    if spell=="center":
         #r = requests.get("https://maker.ifttt.com/trigger/fan_on/with/key/1AuYxQt-J4XzkDl3ERDUs")
         #print "trinket_pin trigger"
-    elif (spell=="circle"):
+    if spell=="circle":
         r = requests.get("https://maker.ifttt.com/trigger/fan_on/with/key/1AuYxQt-J4XzkDl3ERDUs")
         #print "switch_pin OFF"
     	#print "nox_pin OFF"
     	#print "incendio_pin ON"
-    elif (spell=="eight"):
+    if spell=="eight":
         r = requests.get("192.168.0.35/on")
-    elif (spell=="left"):
+    if spell=="left":
     	#print "switch_pin OFF"
     	#print "nox_pin ON"
     	#print "incendio_pin OFF"
-    elif (spell=="square"):
+    if (spell=="square"):
         None
-    elif (spell=="swish"):
+    if (spell=="swish"):
         None
-    elif (spell=="tee"):
+    if (spell=="tee"):
         None
-    elif (spell=="triangle"):
+    if (spell=="triangle"):
         None
-    elif (spell=="zee"):
+    if (spell=="zee"):
         None
-    elif (spell=="nox"):
+    if (spell=="nox"):
         r = requests.get("192.168.0.36/off")
-    elif (spell=="lumos"):
+    if (spell=="lumos"):
         r = requests.get("192.168.0.36/on")
-    elif (spell=="accio"):
+    if (spell=="accio"):
         r = requests.get("192.168.0.36/on")
-    elif (spell=="aqua"):
+    if (spell=="aqua"):
         r = requests.get("192.168.0.35/on")
-    elif (spell=="incendio"):
+    if (spell=="incendio"):
         r = requests.get("192.168.0.35/on")
     print "CAST: %s" %spell
 
