@@ -16,6 +16,8 @@ import math
 import time
 import imutils
 import requests
+import bottle
+
 
 from imutils.video.pivideostream import PiVideoStream
 
@@ -107,7 +109,7 @@ def CheckOcr(img):
     imgArr = np.array(test_gray).astype(np.float32)
     sample = imgArr.reshape(-1,400).astype(np.float32)
     ret,result,neighbours,dist = knn.findNearest(sample,k=5)
-    print ret, result, neighbours, dist
+    #print ret, result, neighbours, dist
     if nameLookup[ret] is not None:
         print "Match: " + nameLookup[ret]
         return nameLookup[ret]
@@ -126,21 +128,21 @@ def FrameReader():
 
 def Spell(spell):
     #Invoke IoT (or any other) actions here
-    return
+    #return
     if (spell=="center"):
-	print "trinket_pin trigger"
+        #r = requests.get("https://maker.ifttt.com/trigger/fan_on/with/key/1AuYxQt-J4XzkDl3ERDUs")
+        #print "trinket_pin trigger"
     elif (spell=="circle"):
-	print "switch_pin OFF"
-	print "nox_pin OFF"
-	print "incendio_pin ON"
+        r = requests.get("https://maker.ifttt.com/trigger/fan_on/with/key/1AuYxQt-J4XzkDl3ERDUs")
+        #print "switch_pin OFF"
+    	#print "nox_pin OFF"
+    	#print "incendio_pin ON"
     elif (spell=="eight"):
-	print "switch_pin ON"
-	print "nox_pin OFF"
-	print "incendio_pin OFF"
+        r = requests.get("192.168.0.35/on")
     elif (spell=="left"):
-	print "switch_pin OFF"
-	print "nox_pin ON"
-	print "incendio_pin OFF"
+    	#print "switch_pin OFF"
+    	#print "nox_pin ON"
+    	#print "incendio_pin OFF"
     elif (spell=="square"):
         None
     elif (spell=="swish"):
@@ -151,6 +153,16 @@ def Spell(spell):
         None
     elif (spell=="zee"):
         None
+    elif (spell=="nox"):
+        r = requests.get("192.168.0.36/off")
+    elif (spell=="lumos"):
+        r = requests.get("192.168.0.36/on")
+    elif (spell=="accio"):
+        r = requests.get("192.168.0.36/on")
+    elif (spell=="aqua"):
+        r = requests.get("192.168.0.35/on")
+    elif (spell=="incendio"):
+        r = requests.get("192.168.0.35/on")
     print "CAST: %s" %spell
 
 
@@ -300,6 +312,13 @@ try:
     TrackWand()
 except KeyboardInterrupt:
     print("Shutting down...")
+    t.do_run = False
+    find.do_run = False
+    t.join()
+    find.join()
+    cv2.destroyAllWindows()
+    vs.stop()
+    sys.exit(1)
 finally:
     t.do_run = False
     find.do_run = False
